@@ -52,20 +52,19 @@ namespace LoggingKata
 
             // TODO: Create an instance of the TacoBell class
             // TODO: Set the values of the class correctly (Name and Location)
-
-            TacoBell GetTacoBell(string name, double lat, double lon)
-            {
-                var tacoBell = new TacoBell();
-                tacoBell.Name = name;
-                tacoBell.Location = location;
+            
+            
+            var tacoBell = new TacoBell(name, location);
+            tacoBell.Name = name;
+            tacoBell.Location = location;
                 
-                return tacoBell;
-            }
+            return tacoBell;
+            
 
             // TODO: Then, return the instance of your TacoBell class,
             // since it conforms to ITrackable
 
-            return null;
+            
         }
     }
 }

@@ -35,20 +35,51 @@ namespace LoggingKata
 
             // TODO: Create two `ITrackable` variables with initial values of `null`. 
             // These will be used to store your two Taco Bells that are the farthest from each other.
-            
+            ITrackable tacoBell1 = null;
+            ITrackable tacoBell2 = null;
             // TODO: Create a `double` variable to store the distance
 
+            double distance = 0;
+            
             // TODO: Add the Geolocation library to enable location comparisons: using GeoCoordinatePortable;
             // Look up what methods you have access to within this library.
 
             // NESTED LOOPS SECTION----------------------------
-            
+
             // FIRST FOR LOOP -
             // TODO: Create a loop to go through each item in your collection of locations.
             // This loop will let you select one location at a time to act as the "starting point" or "origin" location.
             // Naming suggestion for variable: `locA`
+            for (int i = 0; i < locations.Length; i++)
+            {
+                var locA = locations[i];
+                var corA = new GeoCoordinate();
+                
+                corA.Latitude = locA.Location.Latitude;
+                corA.Longitude = locA.Location.Longitude;
 
+                for (int j = 0; j < locations.Length; j++)
+                {
+                    var locB = locations[j];
+                    var corB = new GeoCoordinate(locB.Location.Latitude, locB.Location.Longitude);
+
+                    if (corA.GetDistanceTo(corB) > distance)
+                    {
+                        distance = corA.GetDistanceTo(corB);
+                        tacoBell1 = locA;
+                        tacoBell2 = locB;
+                        
+                    }
+                }
+            }
+
+            double meters = distance;
+            double miles = DistanceConversion.Convert(meters);
+            logger.LogInfo($"Distance:{tacoBell1.Name} & {tacoBell2.Name} are {Math.Round(miles,2)} miles apart");
+            
             // TODO: Once you have locA, create a new Coordinate object called `corA` with your locA's latitude and longitude.
+            
+            
 
             // SECOND FOR LOOP -
             // TODO: Now, Inside the scope of your first loop, create another loop to iterate through locations again.
@@ -66,7 +97,7 @@ namespace LoggingKata
             // Display these two Taco Bell locations to the console.
 
 
-            
+
         }
     }
 }
